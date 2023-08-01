@@ -12,6 +12,11 @@ public class ToggleSprint extends Feature {
         super("togglesprint");
     }
 
+    @Override
+    public void onTrigger() {
+        Config.toggleSprint = !Config.toggleSprint;
+    }
+
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (!Config.toggleSprint) return;
