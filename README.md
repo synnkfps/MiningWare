@@ -12,12 +12,15 @@ Mining Utility QoL Mod for Hypixel Skyblock (1.8.9)
 
 ## Modules
 <details><summary>Mining</summary>
+  
   - [ ] Hardstone Nuker
   - [ ] Gemstone Nuker
   - [ ] Powder Chest Solver
   - [ ] BlockQueuer (will be op) (trust me :trollface:)
 </details>
+
 <details><summary>Player</summary>
+  
   - [X] Yaw Lock
   - [X] MVP Corrector (grammar)
   - [X] ToggleSprint
