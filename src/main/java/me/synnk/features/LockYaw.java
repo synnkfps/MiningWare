@@ -1,5 +1,6 @@
 package me.synnk.features;
 
+import me.synnk.config.Config;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,7 +18,7 @@ public class LockYaw extends Feature {
 
     @Override
     public void onTrigger() {
-        if (mc.thePlayer != null) {
+        if (mc.thePlayer != null && Config.getBoolean(this.getName())) {
             EntityPlayer player = mc.thePlayer;
             float yaw = player.rotationYaw;
             float newYaw = Math.round(yaw / 90.0F) * 90.0F;

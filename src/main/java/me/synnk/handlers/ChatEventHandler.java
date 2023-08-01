@@ -16,7 +16,7 @@ public class ChatEventHandler {
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (!Config.mvpCorrector) return;
+        if (!Config.getBoolean("mvpcorrector")) return;
         if (event.phase == TickEvent.Phase.END && acceptSuffix) {
             acceptSuffix = false;
         }
@@ -24,7 +24,7 @@ public class ChatEventHandler {
 
     @SubscribeEvent
     public void onSendPacket(PacketSentEvent event) {
-        if (!Config.mvpCorrector) return;
+        if (!Config.getBoolean("mvpcorrector")) return;
 
         Packet<?> packet = event.packet;
 

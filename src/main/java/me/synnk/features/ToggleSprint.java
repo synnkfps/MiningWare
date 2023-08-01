@@ -12,14 +12,9 @@ public class ToggleSprint extends Feature {
         super("togglesprint");
     }
 
-    @Override
-    public void onTrigger() {
-        Config.toggleSprint = !Config.toggleSprint;
-    }
-
     @SubscribeEvent
-    public void onTick(TickEvent.ClientTickEvent event) {
-        if (!Config.toggleSprint) return;
+    public void onTick(TickEvent.PlayerTickEvent event) {
+        if (!Config.getBoolean(this.getName())) return;
         if (nullCheck()) return;
 
         try {
@@ -38,5 +33,10 @@ public class ToggleSprint extends Feature {
 
     private boolean logicCheck() {
         return !mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isSneaking() && mc.thePlayer.getFoodStats().getFoodLevel() > 6f;
+    }
+
+    @Override
+    public void onTrigger() {
+
     }
 }

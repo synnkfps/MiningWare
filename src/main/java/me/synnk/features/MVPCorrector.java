@@ -14,8 +14,7 @@ public class MVPCorrector extends Feature {
 
     @Override
     public void onTrigger() {
-        Config.mvpCorrector = !Config.mvpCorrector;
-        PlayerUtils.showMessage("&8[&bMiningWare&8] &6MVP Corrector " + (Config.mvpCorrector?"&aEnabled":"&cDisabledEE") + "&r");
+
     }
 
     @SubscribeEvent

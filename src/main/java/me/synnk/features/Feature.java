@@ -1,5 +1,8 @@
 package me.synnk.features;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+import me.synnk.config.Config;
+import me.synnk.utils.PlayerUtils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -30,45 +33,47 @@ public abstract class Feature {
     }
 
     private void registerCommand() {
-        ClientCommandHandler.instance.registerCommand(new CommandFeature(this.name, this.aliases));
+        ClientCommandHandler.instance.registerCommand(new CommandFeature(this));
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void onTrigger() {}
-
+    public abstract void onTrigger();
 
     // Custom command class to execute the feature
-    private class CommandFeature extends CommandBase {
+    private static class CommandFeature extends CommandBase {
+        private String featureName;
+        private List<String> featureAliases;
 
-        private final String name;
-        private final List<String> aliases;
+        private String commandName;
 
-        public CommandFeature(String name, List<String> aliases) {
-            this.name = name;
-            this.aliases = aliases;
+        public CommandFeature(Feature feature) {
+            this.featureName = feature.name;
+            this.featureAliases = feature.aliases;
+            this.commandName = feature.name;
         }
 
         @Override
         public List<String> getCommandAliases() {
-            return aliases;
+            return this.featureAliases;
         }
 
         @Override
         public String getCommandName() {
-            return name;
+            return commandName;
         }
 
         @Override
         public String getCommandUsage(ICommandSender sender) {
-            return "/" + name;
+            return "/" + commandName;
         }
 
         @Override
         public void processCommand(ICommandSender sender, String[] args) {
-            onTrigger();
+            Config.setSetting(this.featureName, !Config.getBoolean(this.featureName));
+            PlayerUtils.showMessage("&8[&bMiningWare&8] &6"+ featureName + (Config.getBoolean(featureName)?" &aEnabled":" &cDisabled") + "&r");
         }
 
         @Override
