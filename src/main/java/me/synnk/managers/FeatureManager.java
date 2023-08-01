@@ -21,7 +21,7 @@ public class FeatureManager {
          * @TODO: i think it can be done by just adding "new <feature>()>" to the addSetting parameter...
          */
 
-        // It works by now!
+        // It works by now!!
         Config.addSetting("flashlight", false);
         Config.addSetting("lockyaw", false);
         Config.addSetting("mvpcorrector", false);
