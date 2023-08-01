@@ -13,8 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class Feature {
-    private final String name;
-    private List<String> aliases;
+    private String name = "";
+    private List<String> aliases = Arrays.asList(name);
 
     public Feature(String name) {
         this.name = name;
@@ -82,4 +82,3 @@ public abstract class Feature {
         }
     }
 }
-

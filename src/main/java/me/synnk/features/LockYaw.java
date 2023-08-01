@@ -2,6 +2,8 @@ package me.synnk.features;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Collections;
 
@@ -32,5 +34,10 @@ public class LockYaw extends Feature {
             // Send a chat message to notify the player
             // mc.thePlayer.addChatMessage(new ChatComponentText("Your yaw has been locked to " + newYaw));
         }
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent.ClientTickEvent event) {
+        // empty
     }
 }

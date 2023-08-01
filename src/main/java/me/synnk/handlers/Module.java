@@ -21,11 +21,12 @@ public abstract class Module implements Minecraft {
             return getClass().getAnnotation(IModule.class);
         }
 
-        throw new IllegalStateException("Annotation 'NegroModule' not found!");
+        throw new IllegalStateException("annotation not found"); // thx johnshiozo
     }
 
+    // oops
     public boolean nullCheck() {
-        return mc.thePlayer == null || mc.thePlayer == null;
+        return mc.thePlayer == null || mc.theWorld == null;
     }
 
     public void enable() {

@@ -13,11 +13,25 @@ public class ToggleSprint extends Feature {
     }
 
     @SubscribeEvent
-    public void onTick(TickEvent event) {
+    public void onTick(TickEvent.ClientTickEvent event) {
         if (!Config.toggleSprint) return;
+        if (nullCheck()) return;
 
-        if (!mc.thePlayer.isSprinting() && mc.thePlayer.ridingEntity==null && !mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isSneaking()) {
-            mc.thePlayer.setSprinting(true);
-        }
+        try {
+            if (keyCheck() && logicCheck()) {
+                mc.thePlayer.setSprinting(true);
+            }
+        } catch (Exception ignored) {}
+    }
+
+    private boolean keyCheck() {
+        return mc.gameSettings.keyBindForward.isKeyDown();
+    }
+    private boolean nullCheck() {
+        return mc.thePlayer == null || mc.theWorld == null;
+    }
+
+    private boolean logicCheck() {
+        return !mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isSneaking() && mc.thePlayer.getFoodStats().getFoodLevel() > 6f;
     }
 }

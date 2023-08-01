@@ -6,4 +6,8 @@ import net.minecraftforge.fml.common.Mod;
 public class Config {
     public static boolean mvpCorrector = false;
     public static boolean toggleSprint = true;
+    public static boolean flashlight = false;
+
+
+
 }
