@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "${modid}",
+    "name": "MiningWare",
+    "description": "mining ogaboga v2",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/synnkfps/MiningWare",
+    "updateUrl": "",
+    "authorList": [
+      "SynnK"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
