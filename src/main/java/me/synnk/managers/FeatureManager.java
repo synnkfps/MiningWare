@@ -1,5 +1,6 @@
 package me.synnk.managers;
 
+import me.synnk.api.features.Feature;
 import me.synnk.config.Config;
 import me.synnk.features.*;
 import net.minecraftforge.common.MinecraftForge;

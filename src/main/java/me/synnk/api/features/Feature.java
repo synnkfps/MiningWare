@@ -1,33 +1,30 @@
-package me.synnk.features;
+package me.synnk.api.features;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import me.synnk.config.Config;
 import me.synnk.utils.PlayerUtils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class Feature {
     private String name = "";
+    private final FeatureType type;
     private List<String> aliases = Arrays.asList(name);
 
-    public Feature(String name) {
+    public Feature(String name, FeatureType type) {
         this.name = name;
+        this.type = type;
 
         registerCommand();
     }
 
-    public Feature(String name, List<String> aliases) {
+    public Feature(String name, FeatureType type, List<String> aliases) {
         this.name = name;
         this.aliases = aliases;
+        this.type = type;
 
         registerCommand();
     }
@@ -40,19 +37,25 @@ public abstract class Feature {
         return this.name;
     }
 
-    public abstract void onTrigger();
+    public void onTrigger() {
+    }
 
     // Custom command class to execute the feature
     private static class CommandFeature extends CommandBase {
-        private String featureName;
-        private List<String> featureAliases;
+        private final String featureName;
+        private final List<String> featureAliases;
 
-        private String commandName;
+        private final String commandName;
+        private final FeatureType type;
 
         public CommandFeature(Feature feature) {
             this.featureName = feature.name;
             this.featureAliases = feature.aliases;
             this.commandName = feature.name;
+            this.type = feature.type;
+            if (this.type == FeatureType.TRIGGER) {
+                feature.onTrigger();
+            }
         }
 
         @Override

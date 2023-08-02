@@ -1,8 +1,9 @@
 package me.synnk.features;
 
+import me.synnk.api.features.Feature;
+import me.synnk.api.features.FeatureType;
 import me.synnk.config.Config;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -13,7 +14,7 @@ import static me.synnk.MiningWare.mc;
 public class LockYaw extends Feature {
 
     public LockYaw() {
-        super("lockyaw", Collections.singletonList("lockyaw"));
+        super("lockyaw", FeatureType.TRIGGER,Collections.singletonList("lockyaw"));
     }
 
     @Override

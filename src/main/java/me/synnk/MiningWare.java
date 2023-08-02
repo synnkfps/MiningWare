@@ -31,11 +31,7 @@ public class MiningWare {
     public static final String VERSION = "1.0.0";
     public static final String MODID = "miningware";
 
-
-    @Mod.Instance(MODID)
-
     public static Minecraft mc = Minecraft.getMinecraft();
-
 
     @Mod.EventHandler
     public void preFMLInitialization(FMLPreInitializationEvent event) {
@@ -59,12 +55,6 @@ public class MiningWare {
             KeyBindingManager.addKeybind(name, Keyboard.KEY_NONE, MiningWare.MODNAME);
             new Log("Adding keybind: " + name);
         });
-//
-//        // Retrieve the key bindings from KeyBindingManager and register them
-//        List<KeyBinding> keyBindings = KeyBindingManager.getKeyBindings();
-//        for (KeyBinding keyBind : keyBindings) {
-//            ClientRegistry.registerKeyBinding(keyBind);
-//        }
     }
 
     @Mod.EventHandler
@@ -74,7 +64,13 @@ public class MiningWare {
 
     @SubscribeEvent
     public void onKey(InputEvent.KeyInputEvent event) {
-        // todo so we use it on KeyBindingManager instead
+        for (KeyBinding keyBind: KeyBindingManager.getKeyBindings()) {
+            if (keyBind.isPressed()) {
+                if (!Config.getBoolean(keyBind.getKeyCategory())) {
+
+                }
+            }
+        }
     }
 
     @SubscribeEvent
