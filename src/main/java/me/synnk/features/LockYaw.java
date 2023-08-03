@@ -14,12 +14,12 @@ import static me.synnk.MiningWare.mc;
 public class LockYaw extends Feature {
 
     public LockYaw() {
-        super("lockyaw", FeatureType.TRIGGER,Collections.singletonList("lockyaw"));
+        super("Lock Yaw","lockyaw", FeatureType.TRIGGER,Collections.singletonList("lockyaw"));
     }
 
     @Override
     public void onTrigger() {
-        if (mc.thePlayer != null && Config.getBoolean(this.getName())) {
+        if (mc.thePlayer != null && Config.getBoolean(this.getCommandName())) {
             EntityPlayer player = mc.thePlayer;
             float yaw = player.rotationYaw;
             float newYaw = Math.round(yaw / 90.0F) * 90.0F;

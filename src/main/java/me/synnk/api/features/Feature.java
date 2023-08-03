@@ -1,5 +1,6 @@
 package me.synnk.api.features;
 
+import me.synnk.api.features.FeatureType;
 import me.synnk.config.Config;
 import me.synnk.utils.PlayerUtils;
 import net.minecraft.command.CommandBase;
@@ -10,21 +11,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class Feature {
-    private String name = "";
+    private String commandName;
     private final FeatureType type;
-    private List<String> aliases = Arrays.asList(name);
+    private final String displayName;
+    private List<String> aliases;
 
-    public Feature(String name, FeatureType type) {
-        this.name = name;
-        this.type = type;
-
-        registerCommand();
+    public Feature(String displayName, String name, FeatureType type) {
+        this(displayName, name, type, Arrays.asList(name));
     }
 
-    public Feature(String name, FeatureType type, List<String> aliases) {
-        this.name = name;
-        this.aliases = aliases;
+    public Feature(String displayName, String name, FeatureType type, List<String> aliases) {
+        this.displayName = displayName;
+        this.commandName = name;
         this.type = type;
+        this.aliases = aliases;
 
         registerCommand();
     }
@@ -33,50 +33,55 @@ public abstract class Feature {
         ClientCommandHandler.instance.registerCommand(new CommandFeature(this));
     }
 
-    public String getName() {
-        return this.name;
+    public String getDisplayName() {
+        return this.displayName;
     }
 
+    public String getCommandName() {
+        return this.commandName;
+    }
+
+    public List<String> getAliases() {
+        return this.aliases;
+    }
+
+    // Override this method in subclasses to define the feature behavior
     public void onTrigger() {
     }
 
     // Custom command class to execute the feature
     private static class CommandFeature extends CommandBase {
-        private final String featureName;
-        private final List<String> featureAliases;
-
-        private final String commandName;
-        private final FeatureType type;
+        private final Feature feature;
 
         public CommandFeature(Feature feature) {
-            this.featureName = feature.name;
-            this.featureAliases = feature.aliases;
-            this.commandName = feature.name;
-            this.type = feature.type;
-            if (this.type == FeatureType.TRIGGER) {
-                feature.onTrigger();
-            }
+            this.feature = feature;
         }
 
         @Override
         public List<String> getCommandAliases() {
-            return this.featureAliases;
+            return feature.getAliases();
         }
 
         @Override
         public String getCommandName() {
-            return commandName;
+            return feature.getCommandName();
         }
 
         @Override
         public String getCommandUsage(ICommandSender sender) {
-            return "/" + commandName;
+            return "/" + feature.getCommandName();
         }
 
         @Override
         public void processCommand(ICommandSender sender, String[] args) {
-            Config.setSetting(this.featureName, !Config.getBoolean(this.featureName));
-            PlayerUtils.showMessage("&8[&bMiningWare&8] &6"+ featureName + (Config.getBoolean(featureName)?" &aEnabled":" &cDisabled") + "&r");
+            if (feature.type == FeatureType.TRIGGER) {
+                feature.onTrigger();
+                PlayerUtils.showMessage("&8[&bMiningWare&8] &6" + feature.getDisplayName() + "&aTriggered" + "&r");
+            } else {
+                Config.setSetting(feature.getCommandName(), !Config.getBoolean(feature.getCommandName()), feature.getDisplayName());
+                PlayerUtils.showMessage("&8[&bMiningWare&8] &6" + feature.getDisplayName() + (Config.getBoolean(feature.getCommandName()) ? " &aEnabled" : " &cDisabled") + "&r");
+            }
+
         }
 
         @Override

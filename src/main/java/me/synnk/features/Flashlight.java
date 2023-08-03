@@ -6,7 +6,7 @@ import me.synnk.api.features.FeatureType;
 
 public class Flashlight extends Feature {
     public Flashlight() {
-        super("flashlight", FeatureType.TOGGLE);
+        super("FlashLight","flashlight", FeatureType.TOGGLE);
     }
 
     @Override

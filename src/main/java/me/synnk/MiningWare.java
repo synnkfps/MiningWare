@@ -67,7 +67,7 @@ public class MiningWare {
         for (KeyBinding keyBind: KeyBindingManager.getKeyBindings()) {
             if (keyBind.isPressed()) {
                 if (!Config.getBoolean(keyBind.getKeyCategory())) {
-
+                    // empty
                 }
             }
         }

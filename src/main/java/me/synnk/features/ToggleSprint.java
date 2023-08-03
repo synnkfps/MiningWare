@@ -10,12 +10,12 @@ import static me.synnk.MiningWare.mc;
 
 public class ToggleSprint extends Feature {
     public ToggleSprint() {
-        super("togglesprint", FeatureType.TOGGLE);
+        super("Toggle Sprint","togglesprint", FeatureType.TOGGLE);
     }
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
-        if (!Config.getBoolean(this.getName())) return;
+        if (!Config.getBoolean(this.getCommandName())) return;
         if (nullCheck()) return;
 
         try {

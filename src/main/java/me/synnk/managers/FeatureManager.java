@@ -19,7 +19,11 @@ public class FeatureManager {
         modules.add(new BlockQueuer());
 
         // Add settings for all features
-        modules.forEach(feature -> Config.addSetting(feature.getName().toLowerCase(), false));
+        modules.forEach(feature -> Config.addSetting(
+                feature.getCommandName().toLowerCase(),
+                false, // Initial value for the setting (you can change it to true if needed)
+                feature.getDisplayName())
+        );
 
         modules.forEach(MinecraftForge.EVENT_BUS::register);
     }
@@ -30,7 +34,7 @@ public class FeatureManager {
 
     public static Feature getModuleByName(String name) {
         return modules.stream()
-                .filter(module -> module.getName().equalsIgnoreCase(name))
+                .filter(module -> module.getCommandName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElse(null);
     }

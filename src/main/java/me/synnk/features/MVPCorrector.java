@@ -9,7 +9,7 @@ import static java.util.Arrays.asList;
 
 public class MVPCorrector extends Feature {
     public MVPCorrector() {
-        super("mvpcorrector", FeatureType.TOGGLE, asList("mvpc", "mvpgrammar", "mvpg"));
+        super("MVP Grammar","mvpcorrector", FeatureType.TOGGLE, asList("mvpc", "mvpgrammar", "mvpg"));
     }
 
     @Override
