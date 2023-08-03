@@ -75,8 +75,10 @@ public abstract class Feature {
         @Override
         public void processCommand(ICommandSender sender, String[] args) {
             if (feature.type == FeatureType.TRIGGER) {
+                Config.setSetting(feature.getCommandName(), !Config.getBoolean(feature.getCommandName()), feature.getDisplayName());
                 feature.onTrigger();
-                PlayerUtils.showMessage("&8[&bMiningWare&8] &6" + feature.getDisplayName() + "&aTriggered" + "&r");
+                Config.setSetting(feature.getCommandName(), !Config.getBoolean(feature.getCommandName()), feature.getDisplayName());
+                PlayerUtils.showMessage("&8[&bMiningWare&8] &6" + feature.getDisplayName() + " &aTriggered" + "&r");
             } else {
                 Config.setSetting(feature.getCommandName(), !Config.getBoolean(feature.getCommandName()), feature.getDisplayName());
                 PlayerUtils.showMessage("&8[&bMiningWare&8] &6" + feature.getDisplayName() + (Config.getBoolean(feature.getCommandName()) ? " &aEnabled" : " &cDisabled") + "&r");
