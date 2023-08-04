@@ -20,7 +20,9 @@ public class Config {
     public static Object getSetting(String settingName) {
         return settings.getOrDefault(settingName, null);
     }
-
+    public static HashMap<String, List<Object>> getSettings() {
+        return settings;
+    }
     public static Object getDisplayName(String settingName) {
         if (settings.containsKey(settingName)) {
             List<Object> keySetting = settings.get(settingName);

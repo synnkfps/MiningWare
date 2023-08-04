@@ -51,7 +51,8 @@ public class MiningWare {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ChatEventHandler());
 
-        Config.settingNames.forEach(name -> {
+
+        Config.getSettings().forEach((name, values) -> {
             KeyBindingManager.addKeybind(name, Keyboard.KEY_NONE, MiningWare.MODNAME);
             new Log("Adding keybind: " + name);
         });

@@ -1,6 +1,7 @@
 package me.synnk.managers;
 
 import me.synnk.api.features.Feature;
+import me.synnk.clickgui.ClickGUI;
 import me.synnk.config.Config;
 import me.synnk.features.*;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,6 +18,9 @@ public class FeatureManager {
         modules.add(new MVPCorrector());
         modules.add(new ToggleSprint());
         modules.add(new BlockQueuer());
+
+        // GUI
+        modules.add(new ClickGUI());
 
         // Add settings for all features
         modules.forEach(feature -> Config.addSetting(
